@@ -889,6 +889,7 @@ export default async function packageRoutes(fastify: FastifyInstance) {
     }
 
     const isOwn = pkg.user_id === user.id
+    const canManagePackage = isOwn || isAdmin
 
     // 计算剩余配额信息
     // 安全注意：只有在用户有权限访问套餐（canAccess）时才计算配额信息
@@ -985,10 +986,10 @@ export default async function packageRoutes(fastify: FastifyInstance) {
         network_mode: pkg.network_mode,
         instance_type: pkg.instance_type,  // 实例类型
         host_ids: (pkg as { host_ids?: number[] }).host_ids || [],
-        host_storage_pools: isOwn || isAdmin ? ((pkg as any).host_storage_pools || {}) : undefined,
-        host_traffic_multipliers: isOwn || isAdmin ? ((pkg as any).host_traffic_multipliers || {}) : undefined,
-        privileged: isOwn ? pkg.privileged : 0,
-        nested: isOwn ? pkg.nested : 0,
+        host_storage_pools: canManagePackage ? ((pkg as any).host_storage_pools || {}) : undefined,
+        host_traffic_multipliers: canManagePackage ? ((pkg as any).host_traffic_multipliers || {}) : undefined,
+        privileged: canManagePackage ? pkg.privileged : 0,
+        nested: canManagePackage ? pkg.nested : 0,
         active: pkg.active,
         monthly_traffic_limit: pkg.monthly_traffic_limit,
         port_limit: pkg.port_limit,
@@ -1013,9 +1014,9 @@ export default async function packageRoutes(fastify: FastifyInstance) {
         boot_autostart_delay: pkg.boot_autostart_delay,
         boot_host_shutdown_timeout: pkg.boot_host_shutdown_timeout,
         // 全局共享配置（仅套餐所有者查看时返回）
-        global_shared: isOwn ? ((pkg as any).global_shared ?? false) : undefined,
-        global_quota_multiplier: isOwn ? null : undefined,
-        global_max_instances: isOwn
+        global_shared: canManagePackage ? ((pkg as any).global_shared ?? false) : undefined,
+        global_quota_multiplier: canManagePackage ? null : undefined,
+        global_max_instances: canManagePackage
           ? (((pkg as any).global_shared ?? false) ? normalizePublicPackageMaxInstances((pkg as any).global_max_instances) : null)
           : undefined,
         // 实例操作权限（所有用户都需要知道是否可以删除）

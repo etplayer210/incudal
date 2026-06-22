@@ -236,6 +236,7 @@ export default {
         myHostCreate: '创建节点',
         myHostDetail: '节点详情',
         myPackageCreate: '创建套餐',
+        myPackageDetail: '套餐详情',
         myPackageEdit: '编辑套餐',
         telegramSettings: 'Telegram 设置',
         adminCreateInstance: '管理员创建实例',
@@ -5312,6 +5313,9 @@ export default {
             installHintIpv6: '提示：如需 IPv6 网络模式（NAT+IPv6、IPv6 Only），请先在宿主机执行安装脚本，脚本会自动生成 IPv6 子网信息供您填入下方表单。',
             ipv6OptionalHint: '如不清楚以上信息，可先留空。在节点宿主机执行安装脚本后，脚本会自动检测并输出可用的 IPv6 子网，届时回到面板编辑节点补充即可。',
             storagePoolAfterConnectHint: '节点连接成功后，请记得前往节点详细页的“存储”标签页创建存储池。',
+            online: '在线',
+            offline: '离线',
+            maintenance: '维护中',
             noHosts: '暂无节点',
             noHostsHint: '添加节点后可以在其上创建实例',
             calibrateAll: '对齐全部',
@@ -5406,6 +5410,23 @@ export default {
             hosted: '托管套餐',
             owner: '所有者',
             filterByUserId: '用户ID',
+            detail: {
+                invalidId: '无效的套餐 ID',
+                tabs: {
+                    overview: '概览',
+                    config: '配置',
+                    plans: '方案',
+                },
+                overview: {
+                    basic: '基础配置',
+                    visibility: '可见性',
+                    boundHosts: '绑定节点',
+                },
+                danger: {
+                    title: '危险操作',
+                    deleteHint: '删除套餐会移除其配置。已有实例或被其他套餐依赖时，后端会拒绝删除。',
+                },
+            },
         },
         // 套餐方案管理
         plans: {
@@ -5431,6 +5452,7 @@ export default {
             unlimitedHint: '留空表示无限制',
             billingConfig: '计费配置',
             price: '价格',
+            priceUnit: '元',
             billingCycle: '计费周期',
             setupFee: '开通费',
             slaGuarantee: 'SLA保证',

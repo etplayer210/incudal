@@ -236,6 +236,7 @@ export default {
         myHostCreate: 'Create Host',
         myHostDetail: 'Host Details',
         myPackageCreate: 'Create Package',
+        myPackageDetail: 'Package Details',
         myPackageEdit: 'Edit Package',
         telegramSettings: 'Telegram Settings',
         adminCreateInstance: 'Admin Create Instance',
@@ -5306,6 +5307,9 @@ export default {
             installHintIpv6: 'Tip: For IPv6 modes (NAT+IPv6, IPv6 Only), run the install script on the host first. It will auto-generate IPv6 subnet info for you to fill in below.',
             ipv6OptionalHint: 'Not sure? Leave blank for now. Run the install script on the host first — it will detect and display your IPv6 subnet. Then come back and edit the node to fill in.',
             storagePoolAfterConnectHint: 'After the node connects successfully, remember to create a storage pool from the Storage tab on the node detail page.',
+            online: 'Online',
+            offline: 'Offline',
+            maintenance: 'Maintenance',
             noHosts: 'No hosts',
             noHostsHint: 'Add hosts to create instances on them',
             calibrateAll: 'Sync All Usage',
@@ -5402,6 +5406,23 @@ export default {
             hosted: 'Hosted',
             owner: 'Owner',
             filterByUserId: 'User ID',
+            detail: {
+                invalidId: 'Invalid package ID',
+                tabs: {
+                    overview: 'Overview',
+                    config: 'Config',
+                    plans: 'Plans',
+                },
+                overview: {
+                    basic: 'Basic Config',
+                    visibility: 'Visibility',
+                    boundHosts: 'Bound Hosts',
+                },
+                danger: {
+                    title: 'Danger Zone',
+                    deleteHint: 'Deleting this package removes its configuration. The server will reject deletion when instances or dependent packages still use it.',
+                },
+            },
         },
         // Package plans management
         plans: {
@@ -5427,6 +5448,7 @@ export default {
             unlimitedHint: 'Leave empty for unlimited',
             billingConfig: 'Billing Configuration',
             price: 'Price',
+            priceUnit: 'CNY',
             billingCycle: 'Billing Cycle',
             setupFee: 'Setup Fee',
             slaGuarantee: 'SLA Guarantee',

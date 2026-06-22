@@ -12,6 +12,7 @@ const hiddenHostingRouteNames = new Set([
   'my-host-create',
   'my-host-detail',
   'my-packages',
+  'my-package-detail',
   'my-package-create',
   'my-package-edit',
   'hosting-wallet'
@@ -204,9 +205,19 @@ const routes: RouteRecordRaw[] = [
     meta: { requiresAuth: true, titleKey: 'nav.myPackageCreate', title: '创建套餐' }
   },
   {
+    path: '/resources/packages/:id',
+    name: 'my-package-detail',
+    component: () => import('@/views/resources/MyPackageDetailView.vue'),
+    meta: { requiresAuth: true, titleKey: 'nav.myPackageDetail', title: '套餐详情' }
+  },
+  {
     path: '/resources/packages/:id/edit',
     name: 'my-package-edit',
-    component: () => import('@/views/resources/PackageFormView.vue'),
+    redirect: to => ({
+      name: 'my-package-detail',
+      params: { id: to.params.id },
+      query: { tab: 'config' }
+    }),
     meta: { requiresAuth: true, titleKey: 'nav.myPackageEdit', title: '编辑套餐' }
   },
   // 托管余额页面

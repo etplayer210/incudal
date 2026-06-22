@@ -16,6 +16,18 @@ defineOptions({
   name: 'PackageFormView'
 })
 
+const props = withDefaults(defineProps<{
+  embedded?: boolean
+  packageId?: number | null
+}>(), {
+  embedded: false,
+  packageId: null
+})
+
+const emit = defineEmits<{
+  (e: 'saved'): void
+}>()
+
 const { t } = useI18n()
 const router = useRouter()
 const route = useRoute()
@@ -24,8 +36,8 @@ const themeStore = useThemeStore()
 const authStore = useAuthStore()
 
 // Mode: create or edit
-const isEditMode = computed(() => !!route.params.id)
-const packageId = computed(() => route.params.id ? Number(route.params.id) : null)
+const isEditMode = computed(() => props.packageId !== null || !!route.params.id)
+const packageId = computed(() => props.packageId ?? (route.params.id ? Number(route.params.id) : null))
 type PackageCreationMode = 'free' | 'paid'
 const packageCreationMode = ref<PackageCreationMode>('free')
 const showPackageLevelInstanceDefaults = computed(() => isEditMode.value || packageCreationMode.value === 'free')
@@ -762,6 +774,10 @@ async function savePackage(): Promise<void> {
     if (isEditMode.value && packageId.value) {
       await api.packages.update(packageId.value, data as UpdatePackageRequest)
       toast.success(t('admin.packages.packageUpdated'))
+      if (props.embedded) {
+        emit('saved')
+        return
+      }
     } else {
       await api.packages.create(data as CreatePackageRequest)
       toast.success(t('admin.packages.packageCreated'))
@@ -776,6 +792,7 @@ async function savePackage(): Promise<void> {
 }
 
 function goBack(): void {
+  if (props.embedded) return
   router.push({ name: 'my-packages' })
 }
 </script>
@@ -783,7 +800,7 @@ function goBack(): void {
 <template>
   <div class="space-y-6 animate-fade-in">
     <!-- Header -->
-    <div class="page-header">
+    <div v-if="!embedded" class="page-header">
       <div class="flex items-center gap-4">
         <button
           class="p-2 rounded-lg transition-colors"
@@ -1488,7 +1505,7 @@ function goBack(): void {
 
       <!-- Form Actions -->
       <div class="flex items-center justify-end gap-4">
-        <button type="button" class="btn-secondary" @click="goBack">
+        <button v-if="!embedded" type="button" class="btn-secondary" @click="goBack">
           {{ t('common.cancel') }}
         </button>
         <button type="submit" class="btn-primary" :disabled="saving || !form.name">
