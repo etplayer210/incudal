@@ -5705,6 +5705,7 @@ export default {
             allowInstanceDeletion: '关闭后，使用此套餐创建的实例将不允许用户删除',
             freePackageCreationMode: '免费实例无需创建方案，实例会直接继承本页配置。若需要门槛或想按付费实例流程开通，请选择付费实例套餐，创建后添加方案并将价格设置为 0 元。',
             paidPackageCreationMode: '付费实例会使用方案里的资源、实例配额、流量和价格。本页会隐藏这些会被方案覆盖的项目，并使用默认值保存套餐。',
+            paidPackageLockedToPlans: '当前套餐已有方案，会按付费实例套餐运行。若要改回免费实例套餐，请先在方案选项卡删除所有方案。',
         },
         units: {
             seconds: '秒',

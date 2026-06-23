@@ -5701,6 +5701,7 @@ export default {
             allowInstanceDeletion: 'When disabled, instances created with this package will not allow users to delete them',
             freePackageCreationMode: 'Free instances do not need a plan. They inherit the settings on this page directly. If you need an entry requirement or want to use the paid instance flow, choose a paid instance package, then add a plan with the price set to 0.',
             paidPackageCreationMode: 'Paid instances use the resources, quotas, traffic, and price from their plan. This page hides the fields that will be overridden by plans and saves package defaults instead.',
+            paidPackageLockedToPlans: 'This package already has plans, so it runs as a paid instance package. To switch it back to free instances, delete all plans from the Plans tab first.',
         },
         units: {
             seconds: 'seconds',

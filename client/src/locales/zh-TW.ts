@@ -6373,6 +6373,7 @@ export default {
             allowInstanceDeletion: '關閉後，使用此方案建立的實例將不允許使用者刪除',
             freePackageCreationMode: '免費實例無需建立方案，實例會直接繼承本頁設定。若需要門檻或想按付費實例流程開通，請選擇付費實例方案，建立後新增方案並將價格設為 0 元。',
             paidPackageCreationMode: '付費實例會使用方案裡的資源、實例配額、流量與價格。本頁會隱藏這些會被方案覆蓋的項目，並使用預設值儲存方案。',
+            paidPackageLockedToPlans: '目前方案已有方案項目，會按付費實例方案運行。若要改回免費實例方案，請先在方案選項卡刪除所有方案。',
         },
         units: {
             seconds: '秒',
